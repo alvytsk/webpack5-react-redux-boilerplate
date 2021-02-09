@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 var path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: ["./src/index.jsx"],
   output: {
     filename: "[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
@@ -13,6 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        resolve: { extensions: [".js", ".jsx"] },
         loader: "babel-loader",
         exclude: /node_modules/,
       },
@@ -21,8 +22,8 @@ module.exports = {
         use: ["style-loader", "css-loader", "less-loader"],
       },
       {
-        test: /\.(jpe?g|png|svg)$/i,
-        loader: "file-loader",
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        type: "asset/resource",
       },
     ],
   },

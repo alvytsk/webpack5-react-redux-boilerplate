@@ -2,9 +2,9 @@
   "name": "err-boilerplate",
   "version": "0.0.1",
   "description": "Electron-React-Redux Boilerplate",
-  "main": "index.js",
+  "main": "index.jsx",
   "repository": "https://github.com/alvytsk/err-boilerplate.git",
-  "author": "Alexey Vymyatnin <vymyatnin_av@lemz-t.ru>",
+  "author": "Alexey Vymyatnin <alvytsk@yandex.ru>",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode=production",
