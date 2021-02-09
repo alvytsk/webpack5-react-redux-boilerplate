@@ -1,12 +1,5 @@
 import React from "react";
 import ReactDOM, { render } from "react-dom";
-
-const App = () => {
-  return (
-    <div style={{ textAlign: "center" }}>
-      <h1>Welcome</h1>
-    </div>
-  );
-};
+import App from "./App";
 
 ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,11 +1,12 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var path = require("path");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
@@ -15,10 +16,14 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.(css|less)$/i,
+        use: ["style-loader", "css-loader", "less-loader"],
+      },
     ],
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "public"),
+    contentBase: path.resolve(__dirname, "dist"),
     historyApiFallback: true,
     compress: true,
     port: 3000,
@@ -28,5 +33,6 @@ module.exports = {
   plugins: [
     // ...
     new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],
 };
