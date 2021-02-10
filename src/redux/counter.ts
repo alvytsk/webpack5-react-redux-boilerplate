@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: 'counter',
+  name: "counter",
   initialState: {
     value: 0,
   },
   reducers: {
-    increment: state => {
+    increment: (state) => {
       state.value += 1;
     },
-    decrement: state => {
+    decrement: (state) => {
       state.value -= 1;
     },
   },

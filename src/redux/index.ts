@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import counter from "./counter";
 
 const store = configureStore({
@@ -6,5 +6,7 @@ const store = configureStore({
     counter: counter.reducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;
