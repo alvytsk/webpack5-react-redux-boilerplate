@@ -1,2 +1,2 @@
-# err-boilerplate
-Electron React Redux Boilerplate
+# wrr-boilerplate
+Webpack 5 React Redux Boilerplate
