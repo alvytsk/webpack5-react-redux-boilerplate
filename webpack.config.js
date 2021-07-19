@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
     entry: ["./src/index.tsx"],
     output: {
       filename: "[name].[fullhash].js",
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "build"),
     },
     module: {
       rules: [
@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
       minimize: true,
     },
     devServer: {
-      contentBase: path.resolve(__dirname, "dist"),
+      contentBase: path.resolve(__dirname, "build"),
       open: env.BROWSER === "none" ? false : true,
       historyApiFallback: true,
       compress: true,

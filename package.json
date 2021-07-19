@@ -1,7 +1,7 @@
 {
   "name": "err-boilerplate",
   "version": "0.0.1",
-  "description": "Electron-React-Redux Boilerplate",
+  "description": "Webpack5-React-ReduxToolkit Boilerplate",
   "main": "index.jsx",
   "repository": "https://github.com/alvytsk/err-boilerplate.git",
   "author": "Alexey Vymyatnin <alvytsk@yandex.ru>",
