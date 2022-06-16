@@ -1,7 +1,7 @@
 // import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import counter from "../redux/counter";
-import { RootState } from "../redux";
+import counter from "../state/counter";
+import { RootState } from "../state";
 
 const Counter = () => {
   const dispatch = useDispatch();
