@@ -4,6 +4,12 @@
         "es2021": true,
         "jest": true
     },
+    "ignorePatterns": [
+        "node_modules",
+        "build",
+        "dist",
+        "public"
+    ],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -23,6 +29,14 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off"
+        "eqeqeq": "error",
+        "no-console": "warn",
+        "no-undef": "off",
+        "no-unused-vars": "off",
+        "prettier/prettier": "error",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-unused-vars": "warn"
     }
 }

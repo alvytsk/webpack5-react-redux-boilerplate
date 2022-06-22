@@ -2,15 +2,25 @@
   "name": "webpack5-react-redux",
   "version": "0.0.1",
   "description": "Webpack5-React-ReduxToolkit Boilerplate",
-  "main": "index.jsx",
+  "main": "index.tsx",
   "repository": "https://github.com/webpack5-react-redux-boilerplate.git",
   "author": "Alexey Vymyatnin <alvytsk@yandex.ru>",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --mode development --open",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix --ext .ts,.tsx ."
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix src/"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
@@ -32,6 +42,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
+    "lint-staged": "^13.0.2",
     "mini-css-extract-plugin": "^2.6.1",
     "prettier": "^2.7.1",
     "redux-devtools": "^3.7.0",
