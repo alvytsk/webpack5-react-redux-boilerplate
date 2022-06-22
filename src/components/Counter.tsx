@@ -1,30 +1,27 @@
 // import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import counter from "../state/counter";
+import { increment, decrement } from "../state/counterSlice";
 import { RootState } from "../state";
 
 const Counter = () => {
-  const dispatch = useDispatch();
-  const { value } = useSelector((state: RootState) => state.counter);
+  const count = useSelector((state: RootState) => state.counter.value)
+  const dispatch = useDispatch()
 
   return (
-    <div>
-      {value}
-      <br />
-      <button
-        onClick={(event) => {
-          dispatch(counter.actions.increment());
-        }}
-      >
-        Increment
-      </button>
-      <button
-        onClick={(event) => {
-          dispatch(counter.actions.decrement());
-        }}
-      >
-        Decrement
-      </button>
+    <div className="counter-wrapper">
+      <div className="counter-value">{count}</div>
+      <div className="buttons-block">
+        <button
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <button
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div>
     </div>
   );
 };

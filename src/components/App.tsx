@@ -1,16 +1,18 @@
 import React from "react";
-import "./App.less";
+import "./app.scss";
 import Counter from "./Counter";
 
 const App = () => {
   return (
-    <div className="app">
-      Welcome to Webpack5-React-Redux Boilerplate!
-      <p />
-      <img src="assets/react-redux.png" height={200} />
-      <p />
-      <Counter />
-    </div>
+    <section className="container">
+      <div className="app-wrapper">
+          <div className="title">
+            Welcome to Webpack5 React Redux Boilerplate!
+          </div>
+          <img src="assets/react-redux.png" className="logo" />
+          <Counter />
+      </div>
+    </section>
   );
 };
 
