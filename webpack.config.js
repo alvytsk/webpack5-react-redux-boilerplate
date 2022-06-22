@@ -1,52 +1,52 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var path = require("path");
+var path = require('path');
 
 module.exports = (env, argv) => {
   // console.log(env);
   return {
-    entry: ["./src/index.tsx"],
+    entry: ['./src/index.tsx'],
     output: {
-      filename: "static/js/[name].[contenthash:8].js",
-      path: path.resolve(__dirname, "build"),
-      chunkFilename: "static/js/[name].[contenthash:8].chunk.js",
+      filename: 'static/js/[name].[contenthash:8].js',
+      path: path.resolve(__dirname, 'build'),
+      chunkFilename: 'static/js/[name].[contenthash:8].chunk.js'
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
-          use: "ts-loader",
-          exclude: /node_modules/,
+          use: 'ts-loader',
+          exclude: /node_modules/
         },
         {
           test: /\.jsx?$/,
-          resolve: { extensions: [".js", ".jsx"] },
-          loader: "babel-loader",
-          exclude: /node_modules/,
+          resolve: { extensions: ['.js', '.jsx'] },
+          loader: 'babel-loader',
+          exclude: /node_modules/
         },
         {
           test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
+          use: [
+            // Creates `style` nodes from JS strings
+            'style-loader',
+            // Translates CSS into CommonJS
+            'css-loader',
+            // Compiles Sass to CSS
+            'sass-loader'
+          ]
         },
         {
           test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-          use: "url-loader",
+          use: 'url-loader'
         },
         {
           test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-          type: "asset/resource",
-        },
-      ],
+          type: 'asset/resource'
+        }
+      ]
     },
     stats: {
       cached: false,
@@ -54,46 +54,46 @@ module.exports = (env, argv) => {
       chunks: false,
       chunkModules: false,
       chunkOrigins: false,
-      modules: false,
+      modules: false
     },
     resolve: {
-      extensions: [".tsx", ".ts", ".js", ".jsx"],
+      extensions: ['.tsx', '.ts', '.js', '.jsx']
     },
     optimization: {
-      splitChunks: { chunks: "all" },
-      minimize: true,
+      splitChunks: { chunks: 'all' },
+      minimize: true
     },
     devServer: {
       static: {
-        directory: path.resolve(__dirname, "build"),
+        directory: path.resolve(__dirname, 'build')
       },
-      open: env.BROWSER === "none" ? false : true,
+      open: env.BROWSER === 'none' ? false : true,
       historyApiFallback: true,
       compress: true,
       port: 3000,
       hot: true,
       devMiddleware: {
         stats: {
-          modules: false,
-        },
-      },
+          modules: false
+        }
+      }
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({ template: "./public/index.html" }),
+      new HtmlWebpackPlugin({ template: './public/index.html' }),
       new MiniCssExtractPlugin({
-        filename: "static/css/[name].[contenthash:8].css",
-        chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
+        filename: 'static/css/[name].[contenthash:8].css',
+        chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: "src/assets",
-            to: "assets",
-            noErrorOnMissing: true,
-          },
-        ],
-      }),
-    ],
+            from: 'src/assets',
+            to: 'assets',
+            noErrorOnMissing: true
+          }
+        ]
+      })
+    ]
   };
 };
