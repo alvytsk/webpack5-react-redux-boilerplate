@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from "./components/App";
-import { Provider } from "react-redux";
-import store from "./state";
+import App from './components/App';
+import { Provider } from 'react-redux';
+import store from './state';
 
 const main = (
   <Provider store={store}>
@@ -12,6 +12,6 @@ const main = (
   </Provider>
 );
 
-const container = document.getElementById("root");
+const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(main);
