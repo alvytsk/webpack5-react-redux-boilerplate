@@ -57,7 +57,10 @@ module.exports = (env, argv) => {
       modules: false
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js', '.jsx']
+      extensions: ['.tsx', '.ts', '.js', '.jsx'],
+      alias: {
+        "~": path.resolve(__dirname, "src/"),
+      },
     },
     optimization: {
       splitChunks: { chunks: 'all' },
