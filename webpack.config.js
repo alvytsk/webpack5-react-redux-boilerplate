@@ -79,8 +79,16 @@ module.exports = (env, argv) => {
         stats: {
           modules: false
         }
-      }
+      },
+      client: {
+        overlay: {
+          errors: true,
+          warnings: false,
+        },
+        progress: true,
+      },
     },
+    target: "web",
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './public/index.html' }),
