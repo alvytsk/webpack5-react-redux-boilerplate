@@ -85,7 +85,7 @@ module.exports = (env, argv) => {
           errors: true,
           warnings: false,
         },
-        progress: true,
+        progress: false,
       },
     },
     target: "web",
