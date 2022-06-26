@@ -1,0 +1,76 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, editTodo, setCompleted, TodoItem } from '~/state/todoSlice';
+
+const TodoItem = (item: TodoItem) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editBtnTitle, setEditBtnTitle] = useState<string>('Edit');
+  const [focused, setFocused] = useState(false);
+  const [value, setValue] = useState<string>(item.title);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setEditBtnTitle(editMode ? 'Done' : 'Edit');
+  }, [editMode]);
+
+  React.useEffect(() => {
+    if (focused) {
+      inputRef.current?.focus();
+    } else {
+      inputRef.current?.blur();
+    }
+  }, [focused]);
+
+  const onTodoDelete = () => {
+    dispatch(
+      deleteTodo({
+        id: item.id
+      })
+    );
+  };
+
+  const onTodoEdit = () => {
+    setEditMode(!editMode);
+    if (editMode) {
+      setFocused(false);
+      dispatch(
+        editTodo({
+          id: item.id,
+          title: value
+        })
+      );
+    } else {
+      setFocused(true);
+    }
+  };
+
+  const onTodoCompleted = (event) => {
+    if (item.completed !== event.target.checked) {
+      dispatch(
+        setCompleted({
+          id: item.id,
+          completed: event.target.checked
+        })
+      );
+    }
+  };
+
+  return (
+    <div>
+      <input type="checkbox" checked={item.completed} onChange={onTodoCompleted} />
+      <input
+        type="text"
+        ref={inputRef}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        disabled={!editMode}
+      />
+      <button onClick={onTodoEdit}>{editBtnTitle}</button>
+      <button onClick={onTodoDelete}>X</button>
+    </div>
+  );
+};
+
+export default TodoItem;
