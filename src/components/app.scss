@@ -118,6 +118,8 @@ body {
 
   input[type="text"] {
     border: none;
+    width: calc(100% - 125px);
+    text-overflow: ellipsis;
     background-color: inherit;
     color: black;
     font-family: inherit;
@@ -154,5 +156,7 @@ body {
 
   .delete-btn {
     width: 30px;
+    font-weight: 500;
+    color: rgb(203, 27, 27);
   }
 }

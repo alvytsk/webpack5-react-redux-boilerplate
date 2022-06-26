@@ -66,9 +66,13 @@ const TodoItem = (item: TodoItem) => {
         })
       );
     }
+
+    checkboxRef.current?.blur();
   };
 
   const onItemClick = () => {
+    if (editMode) return;
+
     dispatch(
       setCompleted({
         id: item.id,
@@ -89,6 +93,7 @@ const TodoItem = (item: TodoItem) => {
         type="text"
         ref={inputRef}
         value={value}
+        style={{ textDecoration: item.completed && !editMode ? 'line-through' : 'none' }}
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={onKeyDown}
         disabled={!editMode}
@@ -96,7 +101,7 @@ const TodoItem = (item: TodoItem) => {
       <div className="todo-btns-wrapper">
         <button onClick={onTodoEdit}>{editBtnTitle}</button>
         <button className="delete-btn" onClick={onTodoDelete}>
-          X
+          x
         </button>
       </div>
     </div>

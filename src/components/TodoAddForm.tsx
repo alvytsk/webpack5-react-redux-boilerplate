@@ -7,6 +7,8 @@ const TodoAddForm = () => {
   const dispatch = useDispatch();
 
   const onAddTodo = () => {
+    if (!title) return;
+
     dispatch(
       addTodo({
         title: title
