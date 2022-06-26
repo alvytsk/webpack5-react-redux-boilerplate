@@ -16,9 +16,20 @@ const TodoAddForm = () => {
     setTitle('');
   };
 
+  const onKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onAddTodo();
+    }
+  };
+
   return (
-    <div>
-      <input type="text" value={title} onChange={(event) => setTitle(event.target.value)} />
+    <div className="add-todo-form">
+      <input
+        type="text"
+        value={title}
+        onKeyDown={onKeyDown}
+        onChange={(event) => setTitle(event.target.value)}
+      />
       <button onClick={onAddTodo}>Add</button>
     </div>
   );

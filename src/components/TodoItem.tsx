@@ -8,6 +8,7 @@ const TodoItem = (item: TodoItem) => {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState<string>(item.title);
   const inputRef = useRef<HTMLInputElement>(null);
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,9 @@ const TodoItem = (item: TodoItem) => {
     }
   }, [focused]);
 
-  const onTodoDelete = () => {
+  const onTodoDelete = (event) => {
+    event.stopPropagation();
+
     dispatch(
       deleteTodo({
         id: item.id
@@ -31,7 +34,9 @@ const TodoItem = (item: TodoItem) => {
     );
   };
 
-  const onTodoEdit = () => {
+  const onTodoEdit = (event) => {
+    event.stopPropagation();
+
     setEditMode(!editMode);
     if (editMode) {
       setFocused(false);
@@ -46,6 +51,12 @@ const TodoItem = (item: TodoItem) => {
     }
   };
 
+  const onKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onTodoEdit(event);
+    }
+  };
+
   const onTodoCompleted = (event) => {
     if (item.completed !== event.target.checked) {
       dispatch(
@@ -57,18 +68,35 @@ const TodoItem = (item: TodoItem) => {
     }
   };
 
+  const onItemClick = () => {
+    dispatch(
+      setCompleted({
+        id: item.id,
+        completed: !checkboxRef.current?.checked
+      })
+    );
+  };
+
   return (
-    <div>
-      <input type="checkbox" checked={item.completed} onChange={onTodoCompleted} />
+    <div className="todo-item" onClick={onItemClick}>
+      <input
+        ref={checkboxRef}
+        type="checkbox"
+        checked={item.completed}
+        onChange={onTodoCompleted}
+      />
       <input
         type="text"
         ref={inputRef}
         value={value}
         onChange={(event) => setValue(event.target.value)}
+        onKeyDown={onKeyDown}
         disabled={!editMode}
       />
-      <button onClick={onTodoEdit}>{editBtnTitle}</button>
-      <button onClick={onTodoDelete}>X</button>
+      <div className="todo-btns-wrapper">
+        <button onClick={onTodoEdit}>{editBtnTitle}</button>
+        <button onClick={onTodoDelete}>X</button>
+      </div>
     </div>
   );
 };
