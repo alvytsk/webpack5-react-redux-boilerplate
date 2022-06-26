@@ -7,6 +7,7 @@ const App = () => {
   return (
     <section className="container">
       <div className="app-wrapper">
+        <div className="app-title">Simple Todo App</div>
         <TodoAddForm />
         <TodoList />
       </div>

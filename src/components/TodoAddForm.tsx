@@ -27,6 +27,7 @@ const TodoAddForm = () => {
       <input
         type="text"
         value={title}
+        placeholder="Add todo"
         onKeyDown={onKeyDown}
         onChange={(event) => setTitle(event.target.value)}
       />

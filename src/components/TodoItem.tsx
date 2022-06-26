@@ -95,7 +95,9 @@ const TodoItem = (item: TodoItem) => {
       />
       <div className="todo-btns-wrapper">
         <button onClick={onTodoEdit}>{editBtnTitle}</button>
-        <button onClick={onTodoDelete}>X</button>
+        <button className="delete-btn" onClick={onTodoDelete}>
+          X
+        </button>
       </div>
     </div>
   );

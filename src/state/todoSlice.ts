@@ -8,7 +8,7 @@ export type TodoItem = {
 
 const initialState: TodoItem[] = [
   { id: 0, title: 'Drink coffee', completed: true },
-  { id: 1, title: 'Todo list coding', completed: false },
+  { id: 1, title: 'Todo list coding', completed: true },
   { id: 2, title: 'Check mail', completed: false }
 ];
 
