@@ -38,7 +38,6 @@ const TodoItem = (item: TodoItem) => {
   const onTodoEdit = (event) => {
     event.stopPropagation();
 
-    setEditMode(!editMode);
     if (editMode) {
       setFocused(false);
       dispatch(
@@ -50,11 +49,22 @@ const TodoItem = (item: TodoItem) => {
     } else {
       setFocused(true);
     }
+
+    setEditMode(!editMode);
   };
 
   const onKeyDown = (event) => {
     if (event.key === 'Enter') {
       onTodoEdit(event);
+    }
+  };
+
+  const onLostFocus = (event) => {
+    if (focused) {
+      setFocused(false);
+      setTimeout(() => {
+        if (editMode) setEditMode(false);
+      }, 50);
     }
   };
 
@@ -71,7 +81,9 @@ const TodoItem = (item: TodoItem) => {
     checkboxRef.current?.blur();
   };
 
-  const onItemClick = () => {
+  const onItemClick = (event) => {
+    /* Checkbox has its own handler */
+    if (event.target.type === 'checkbox') return;
     if (editMode) return;
 
     dispatch(
@@ -102,6 +114,7 @@ const TodoItem = (item: TodoItem) => {
         }}
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={onKeyDown}
+        onBlur={onLostFocus}
         disabled={!editMode}
       />
       <div className="todo-btns-wrapper">
