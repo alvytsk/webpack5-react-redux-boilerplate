@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export type TodoItem = {
   id: number;
@@ -6,11 +6,26 @@ export type TodoItem = {
   completed: boolean;
 };
 
-const initialState: TodoItem[] = [
-  { id: 0, title: 'Drink coffee', completed: true },
-  { id: 1, title: 'Todo list coding', completed: true },
-  { id: 2, title: 'Check mail', completed: false }
-];
+// const initialState: TodoItem[] = [
+//   { id: 0, title: 'Drink coffee', completed: true },
+//   { id: 1, title: 'Todo list coding', completed: true },
+//   { id: 2, title: 'Check mail', completed: false }
+// ];
+
+type TodoState = {
+  data: TodoItem[];
+  loading: boolean;
+};
+
+const initialState: TodoState = {
+  data: [],
+  loading: false
+};
+
+export const fetchTodos = createAsyncThunk('users/fetchTodos', async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+  return response.json();
+});
 
 const getIndex = (id: number, arr: TodoItem[]) => {
   return arr.findIndex((item) => item.id === id);
@@ -20,23 +35,38 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    addTodo: (state, action) => {
+    addTodo: (state, { payload }) => {
       const newItem: TodoItem = {
-        id: state.length ? state[state.length - 1].id + 1 : 0,
-        title: action.payload.title,
+        id: state.data.length ? state.data[state.data.length - 1].id + 1 : 0,
+        title: payload.title,
         completed: false
       };
-      state.push(newItem);
+      state.data.push(newItem);
     },
-    deleteTodo: (state, action) => {
-      state.splice(getIndex(action.payload.id, state), 1);
+    deleteTodo: (state, { payload }) => {
+      state.data.splice(getIndex(payload.id, state.data), 1);
     },
-    editTodo: (state, action) => {
-      state[getIndex(action.payload.id, state)].title = action.payload.title;
+    editTodo: (state, { payload }) => {
+      state.data[getIndex(payload.id, state.data)].title = payload.title;
     },
-    setCompleted: (state, action) => {
-      state[getIndex(action.payload.id, state)].completed = action.payload.completed;
+    setCompleted: (state, { payload }) => {
+      state.data[getIndex(payload.id, state.data)].completed = payload.completed;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTodos.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
+      const filtered = payload
+        .filter((item) => item.userId === 1)
+        .map(({ userId, ...rest }) => rest);
+      state.data = filtered;
+      state.loading = false;
+    });
+    builder.addCase(fetchTodos.rejected, (state, action) => {
+      state.loading = false;
+    });
   }
 });
 
