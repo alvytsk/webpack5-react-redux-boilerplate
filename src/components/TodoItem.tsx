@@ -82,6 +82,8 @@ const TodoItem = (item: TodoItem) => {
     );
   };
 
+  const completedAndNotEditing = (item) => item.completed && !editMode;
+
   return (
     <div className="todo-item" onClick={onItemClick}>
       <input
@@ -94,7 +96,10 @@ const TodoItem = (item: TodoItem) => {
         type="text"
         ref={inputRef}
         value={value}
-        style={{ textDecoration: item.completed && !editMode ? 'line-through' : 'none' }}
+        style={{
+          textDecoration: completedAndNotEditing(item) ? 'line-through' : 'none',
+          opacity: completedAndNotEditing(item) ? '0.3' : '1'
+        }}
         onChange={(event) => setValue(event.target.value)}
         onKeyDown={onKeyDown}
         disabled={!editMode}

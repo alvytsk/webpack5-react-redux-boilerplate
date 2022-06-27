@@ -19,7 +19,7 @@ type TodoState = {
 
 const initialState: TodoState = {
   data: [],
-  loading: false
+  loading: true
 };
 
 export const fetchTodos = createAsyncThunk('users/fetchTodos', async () => {
@@ -60,7 +60,8 @@ export const todoSlice = createSlice({
     builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
       const filtered = payload
         .filter((item) => item.userId === 1)
-        .map(({ userId, ...rest }) => rest);
+        .map(({ userId, ...rest }) => rest)
+        .splice(4, 10);
       state.data = filtered;
       state.loading = false;
     });

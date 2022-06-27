@@ -65,6 +65,13 @@ body {
   display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: center;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .todo-item {
@@ -104,7 +111,7 @@ body {
     transition: 120ms transform ease-in-out;
     box-shadow: inset 1em 1em gray;
     /* Windows High Contrast Mode */
-    background-color: gray;
+    background-color: rgb(81, 139, 255);
   }
 
   input[type="checkbox"]:checked::before {
