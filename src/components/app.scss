@@ -53,6 +53,7 @@ body {
     transform: translateX(-1px);
     font-family: inherit;
     font-weight: 400;
+    cursor: pointer;
   }
 
   button:hover {
@@ -159,6 +160,7 @@ body {
     border: 1px solid gray;
     border-radius: 3px;
     font-weight: 300;
+    cursor: pointer;
   }
 
   .delete-btn {
