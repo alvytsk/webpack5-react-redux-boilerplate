@@ -25,6 +25,28 @@ body {
   justify-content: center;
 }
 
+.header-form-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .load-todos-btn {
+    height: 32px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 400;
+    padding: 0px 10px;
+  }
+}
+
+.completed-counter {
+  font-size: 0.9em;
+  font-weight: 300;
+  color: gray;
+}
+
 .add-todo-form {
   padding: 10px 5px;
 
