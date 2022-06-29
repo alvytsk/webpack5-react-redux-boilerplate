@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+type RemoteTodoItem = {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+};
+
 export type TodoItem = {
   id: number;
   title: string;
@@ -15,11 +22,15 @@ export type TodoItem = {
 type TodoState = {
   data: TodoItem[];
   loading: boolean;
+  total: number;
+  completed: number;
 };
 
 const initialState: TodoState = {
   data: [],
-  loading: true
+  loading: true,
+  total: 0,
+  completed: 0
 };
 
 export const fetchTodos = createAsyncThunk('users/fetchTodos', async () => {
@@ -42,30 +53,38 @@ export const todoSlice = createSlice({
         completed: false
       };
       state.data.push(newItem);
+      state.total += 1;
     },
     deleteTodo: (state, { payload }) => {
       state.data.splice(getIndex(payload.id, state.data), 1);
+      state.total = state.data.length;
+      state.completed = state.data.filter((item) => item.completed).length;
     },
     editTodo: (state, { payload }) => {
       state.data[getIndex(payload.id, state.data)].title = payload.title;
     },
     setCompleted: (state, { payload }) => {
-      state.data[getIndex(payload.id, state.data)].completed = payload.completed;
+      const { completed } = payload;
+      state.data[getIndex(payload.id, state.data)].completed = completed;
+      completed ? state.completed++ : state.completed--;
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTodos.pending, (state, action) => {
+    builder.addCase(fetchTodos.pending, (state) => {
+      state.data = [];
       state.loading = true;
     });
     builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
       const filtered = payload
-        .filter((item) => item.userId === 1)
+        .filter((item: RemoteTodoItem) => item.userId === 1)
         .map(({ userId, ...rest }) => rest)
         .splice(4, 10);
       state.data = filtered;
       state.loading = false;
+      state.total = state.data.length;
+      state.completed = state.data.filter((item) => item.completed).length;
     });
-    builder.addCase(fetchTodos.rejected, (state, action) => {
+    builder.addCase(fetchTodos.rejected, (state) => {
       state.loading = false;
     });
   }
