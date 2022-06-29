@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+type RemoteTodoItem = {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+};
+
 export type TodoItem = {
   id: number;
   title: string;
@@ -64,11 +71,12 @@ export const todoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodos.pending, (state) => {
+      state.data = [];
       state.loading = true;
     });
     builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
       const filtered = payload
-        .filter((item) => item.userId === 1)
+        .filter((item: RemoteTodoItem) => item.userId === 1)
         .map(({ userId, ...rest }) => rest)
         .splice(4, 10);
       state.data = filtered;

@@ -21,7 +21,7 @@ const App = () => {
       <div className="app-wrapper">
         <div className="app-title">Simple Todo App</div>
         <div className="header-form-wrapper">
-          <TodoAddForm />
+          <TodoAddForm loading={loading} />
           <button className="load-todos-btn" onClick={loadAllTodos} disabled={loading}>
             Load todos
           </button>
