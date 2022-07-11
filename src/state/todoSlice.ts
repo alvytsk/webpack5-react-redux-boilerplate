@@ -19,14 +19,14 @@ export type TodoItem = {
 //   { id: 2, title: 'Check mail', completed: false }
 // ];
 
-type TodoState = {
+export type TodoState = {
   data: TodoItem[];
   loading: boolean;
   total: number;
   completed: number;
 };
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
   data: [],
   loading: true,
   total: 0,
