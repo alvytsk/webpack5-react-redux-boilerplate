@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { deleteTodo, editTodo, setCompleted, TodoItem } from '~/state/todoSlice';
-import { AppDispatch } from '~/state';
+import { useAppDispatch } from '~/hooks/state';
 
 const TodoItem = (item: TodoItem) => {
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -11,7 +10,7 @@ const TodoItem = (item: TodoItem) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setEditBtnTitle(editMode ? 'Done' : 'Edit');
