@@ -1,66 +1,49 @@
-.lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-
-.lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
+.cssload-speeding-wheel {
+  width: 49px;
+  height: 49px;
+  margin: 0 auto;
+  border: 3px solid rgb(153, 153, 153);
   border-radius: 50%;
-  background: lightgray;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: cssload-spin 1025ms infinite linear;
+  -o-animation: cssload-spin 1025ms infinite linear;
+  -ms-animation: cssload-spin 1025ms infinite linear;
+  -webkit-animation: cssload-spin 1025ms infinite linear;
+  -moz-animation: cssload-spin 1025ms infinite linear;
 }
 
-.lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
-}
-
-.lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-
-.lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-
-.lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
-}
-
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-
+@keyframes cssload-spin {
   100% {
-    transform: scale(1);
+    transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-
+@-o-keyframes cssload-spin {
   100% {
-    transform: scale(0);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-
+@-ms-keyframes cssload-spin {
   100% {
-    transform: translate(24px, 0);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes cssload-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes cssload-spin {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }

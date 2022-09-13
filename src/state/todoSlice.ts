@@ -63,7 +63,7 @@ export const todoSlice = createSlice({
     editTodo: (state, { payload }) => {
       state.data[getIndex(payload.id, state.data)].title = payload.title;
     },
-    setCompleted: (state, { payload }) => {
+    toggleCompleted: (state, { payload }) => {
       const { completed } = payload;
       state.data[getIndex(payload.id, state.data)].completed = completed;
       completed ? state.completed++ : state.completed--;
@@ -91,6 +91,6 @@ export const todoSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addTodo, deleteTodo, editTodo, setCompleted } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, toggleCompleted } = todoSlice.actions;
 
 export default todoSlice.reducer;

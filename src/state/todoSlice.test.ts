@@ -2,7 +2,7 @@ import todoReducer, {
   addTodo,
   deleteTodo,
   editTodo,
-  setCompleted,
+  toggleCompleted,
   initialState,
   TodoState
 } from './todoSlice';
@@ -36,7 +36,7 @@ describe('todoSlice', () => {
       completed: 0
     };
 
-    const action = { type: setCompleted.type, payload: { id: 0, completed: true } };
+    const action = { type: toggleCompleted.type, payload: { id: 0, completed: true } };
     const result = todoReducer(todos, action);
 
     const item = result.data[0];

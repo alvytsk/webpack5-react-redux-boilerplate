@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TodoItem from './TodoItem';
 import { fetchTodos } from '~/state/todoSlice';
-import Spinner from './Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 import { useAppDispatch, useAppSelector } from '~/hooks/state';
 
 const TodoList = () => {
